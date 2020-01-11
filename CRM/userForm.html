@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <!--Import Google Icon Font-->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <!-- Compiled and minified CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+  <!--Let browser know website is optimized for mobile-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="input-field col s12">
+        <i class="material-icons prefix">account_circle</i>
+        <input id="username" type="text" class="validate">
+        <label for="username">Имя и Фамилия инженера</label>
+      </div>
+      <div class="input-field col s12">
+        <i class="material-icons prefix">phone</i>
+        <input id="telephone" type="tel" class="validate"
+          pattern="^(+38)(067|097|068|096|098|039|050|095|066|099|063|073|093|091|092|094|044)([0-9]{7})$" value="+380">
+        <label for="telephone">Телефон инженера</label>
+      </div>
+      <div class="input-field col s12">
+        <i class="material-icons prefix">email</i>
+        <input id="email" type="email" class="validate">
+        <label for="email">e-mail инженера</label>
+      </div>
+      <div class="input-field col s12">
+        <i class="material-icons prefix">send</i>
+        <input id="idchat" type="text" class="validate">
+        <label for="idchat">ID чата Телеграмм</label>
+      </div>
+      <div class="input-field col s6">
+        <button class="btn waves-effect waves-light" id="btn_OK">ОК
+          <i class="material-icons right">check</i>
+        </button>
+      </div>
+      <div class="input-field col s6">
+        <!--<button class="btn waves-effect waves-light" id="btn_CANCEL">Cancel
+            <i class="material-icons right">cancel</i>
+          </button>-->
+      </div><!-- End Row -->
+    </div>
+
+
+  </div>
+  <!-- Compiled and minified JavaScript -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  <script>
+
+    var nameBox = document.getElementById("username");
+    var telBox = document.getElementById("telephone");
+    var emailBox = document.getElementById("email");
+    var idchatBox = document.getElementById("idchat");
+
+    document.getElementById("btn_OK").addEventListener("click", addRecord)
+    //document.getElementById("btn_CANCEL").addEventListener("click", cancelRecord)
+
+    function addRecord() {
+      if (nameBox.value.trim().length < 5 || telBox.value.trim().length < 13 || emailBox.value.trim().length == 0 || idchatBox.value.trim().length == 0) {
+        M.toast({ html: 'Заполните все поля' });
+      } else {
+        var data = {
+          username: nameBox.value,
+          telephone: telBox.value,
+          email: emailBox.value,
+          idchat: idchatBox.value
+        };
+        google.script.run.appendData(data);
+        google.script.run.doneMessage();
+
+      }
+    }
+
+  </script>
+</body>
+
+</html>
